@@ -1,0 +1,6 @@
+Top User Activities Report [
+   13: sort HL7 Code 422
+   2: print office visit OV02132
+   1: unmerge notification NX1115
+   1: view HL7 Code 422
+]

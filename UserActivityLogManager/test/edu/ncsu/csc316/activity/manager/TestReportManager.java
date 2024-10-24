@@ -23,9 +23,9 @@ public class TestReportManager {
     public void testGetDateReportValid() {
         String report = reportManager.getDateReport("02/19/2017");
         
-        //assertEquals("Activities recorded on 02/19/2017 [\r\n"
-        //		+ "   hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422\r\n"
-        //		+ "]", report);         WHYYY FAIL
+        assertEquals("Activities recorded on 02/19/2017 [\n"
+        		+ "   hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422\n"
+        		+ "]", report);
         
         assertTrue("The date report should contain the correct log entry for 02/19/2017", 
         		report.contains("hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422"));
@@ -50,8 +50,8 @@ public class TestReportManager {
     public void testGetHourReportValid() {
         String report = reportManager.getHourReport("10");
         assertTrue(report.contains("hqcooney, 11/08/2016 10:43:29AM, sort, HL7 Code 422"));
-        assertEquals("Activities recorded during hour 10 [\r\n"
-        		+ "   hqcooney, 11/08/2016 10:43:29AM, sort, HL7 Code 422\r\n"
+        assertEquals("Activities recorded during hour 10 [\n"
+        		+ "   hqcooney, 11/08/2016 10:43:29AM, sort, HL7 Code 422\n"
         		+ "]", report);
         
     }
@@ -73,7 +73,7 @@ public class TestReportManager {
      */
     @Test
     public void testGetTopUserActivities() {
-        String report = reportManager.getTopUserActivities(3);
+        String report = reportManager.getTopUserActivities(15);
         assertTrue("The top user activities should contain the correct frequency of 'sort' activities",
         		report.contains("13: sort HL7 Code 422"));
         assertTrue("The top user activities should contain the correct frequency of 'print' activities", 

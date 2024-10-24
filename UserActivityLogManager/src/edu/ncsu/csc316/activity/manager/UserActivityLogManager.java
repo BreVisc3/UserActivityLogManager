@@ -166,16 +166,55 @@ public class UserActivityLogManager {
 	    return sortedHourMap;
 	}
 	
+	
 	/**
 	 * Get most frequented activities
 	 * @param number of activities to read
 	 * @return List of most frequented activities
 	 */
 	public List<String> getTopActivities(int number) {
+		Map<String, List<LogEntry>> activityFrequency = getActionList(logList);
+	    //Map of log sorted by action is acquired *VERIFIED*
+	    
+	    //Sort by longest list
+	    Map<Integer, List<LogEntry>> activityList = DSAFactory.getMap(null);
+	    
+	    List<LogEntry> big = null;
+	    int[] sizes = new int[activityFrequency.size()];
+
+
+	    for(int i = 0; i < sizes.length; i++) {
+	    	int largest = 0;
+		    for(List<LogEntry> find : activityFrequency.values()) {
+		    	if(find.size() > largest) {
+		    		largest = find.size();
+		    		big = find;
+		    	}
+		    }
+		    sizes[i] = largest;
+		    activityFrequency.remove(big.first().getAction()); //To not get rechosen as largest
+		    activityList.put(big.size(), big); //Add into array with frequency key
+	    }
+	    
+	    //Activity list holds sortedByAscending frequency lists
+	    
+	    //SORT BY LARGEST SIZE
+	    List<String> topActivities = getReturnArray(sizes, activityList, big, number);
+	    
+	    return topActivities;
+	}
+	
+	
+	/**
+	 * 
+	 * @param list
+	 * @return
+	 */
+	private Map<String, List<LogEntry>> getActionList(List<LogEntry> list) {
 		Map<String, List<LogEntry>> activityFrequency = DSAFactory.getMap(null);
 	    
 	    // Count occurrences of each activity
-	    for (LogEntry entry : logList) {
+	    for (LogEntry entry : list) {
 	        String activity = entry.getAction(); 
 	        
 	        List<LogEntry> isActivity = activityFrequency.get(activity);
@@ -190,33 +229,39 @@ public class UserActivityLogManager {
 	        }
 	    }
 	    
-	    //SORT BY LARGEST SIZE
+	    return activityFrequency;
+	}
+	
+	private List<String> getReturnArray(int[] sizes, Map<Integer, List<LogEntry>> activityList, List<LogEntry> big, int number) {
+		List<String> topActivities = DSAFactory.getIndexedList();
+	    int count = 0;
 	    
-	    /* int count = 0
-	     * 		while count 0 < number
-	     * 			
-	    */
-	    Map<String, List<LogEntry>> activityList = DSAFactory.getMap(null);
-	    
-	    for(int i = 0; i < Math.min(activityFrequency.size(), number); i++) {
+	    //For each action list in descending order (getting by correctly sorted size[])
+	    for(int i = 0; i < sizes.length; i++) {
 	    	
-	    }
-	    
-	    for (Map<String, List<LogEntry>> entry : activityFrequency.entrySet()) {
-	        activityList.addLast(entry); 
-	    }
-	    
-	    Entry<String, Integer>[] array = new Entry[activityList.size()];
-
-        for (int i = 0; i < activityList.size(); i++) {
-            array[i] = activityList.get(i); 
-        }
-	    
-	    //DSAFactory.getComparisonSorter(null).sort(array);
-	    
-	    List<String> topActivities = DSAFactory.getIndexedList();
-	    for (int i = 0; i < Math.min(number, activityList.size()); i++) {
-	        topActivities.addLast(activityList.get(i).getKey());
+	    	big = activityList.get(sizes[i]); //acquire list
+	    	int freq = 0;					  //set new frequency for action list
+	    	for(@SuppressWarnings("unused") LogEntry log : big) {
+	    		
+	    		//if the number of entries requested hasn't been reached
+	    		if(count < number) {
+	    			
+	    			freq++;
+	    		}
+	    		//if the request number has been reached leave the loop
+	    		else {
+	    			break;
+	    		}
+	    	}
+	    	
+	    	//Add string to return list
+	    	String entry = Integer.toString(freq) + ": " + big.first().getAction() + " " + big.first().getResource();
+	    	topActivities.addLast(entry);
+	    	
+	    	//if the request number was reached break this loop as well
+	    	if(count >= number) {
+	    		break;
+	    	}
 	    }
 	    
 	    return topActivities;

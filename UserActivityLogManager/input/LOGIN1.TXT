@@ -1,3 +1,4 @@
+USERNAME, TIMESTAMP, ACTION, RESOURCE
 hqcooney, 03/02/2015 07:17:42PM, print, office visit OV02132
 hqcooney, 10/02/2015 01:04:38AM, print, office visit OV02132
 gphsu, 11/13/2015 06:36:48AM, sort, HL7 Code 422

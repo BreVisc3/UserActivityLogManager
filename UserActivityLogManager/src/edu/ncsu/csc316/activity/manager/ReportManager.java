@@ -1,8 +1,6 @@
 package edu.ncsu.csc316.activity.manager;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import edu.ncsu.csc316.activity.data.LogEntry;
 import edu.ncsu.csc316.activity.dsa.Algorithm;

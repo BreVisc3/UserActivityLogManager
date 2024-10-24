@@ -4,7 +4,6 @@ import edu.ncsu.csc316.activity.dsa.DataStructure;
 import edu.ncsu.csc316.activity.io.LogEntryReader;
 import edu.ncsu.csc316.dsa.list.List;
 import edu.ncsu.csc316.dsa.map.Map;
-import edu.ncsu.csc316.dsa.map.Map.Entry;
 import edu.ncsu.csc316.dsa.sorter.Sorter;
 
 import java.time.format.DateTimeFormatter;
@@ -177,7 +176,7 @@ public class UserActivityLogManager {
 	    //Map of log sorted by action is acquired *VERIFIED*
 	    
 	    //Sort by longest list
-	    Map<Integer, List<LogEntry>> activityList = DSAFactory.getMap(null);
+	    Map<String, List<LogEntry>> activityList = DSAFactory.getMap(null);
 	    
 	    List<LogEntry> big = null;
 	    int[] sizes = new int[activityFrequency.size()];
@@ -186,14 +185,20 @@ public class UserActivityLogManager {
 	    for(int i = 0; i < sizes.length; i++) {
 	    	int largest = 0;
 		    for(List<LogEntry> find : activityFrequency.values()) {
+		    	
 		    	if(find.size() > largest) {
-		    		largest = find.size();
+		    		largest = find.size();				//ERRRRRROOOORRRRR
 		    		big = find;
+		    	}
+		    	else if(find.size() == largest) {
+		    		if(find.first().getAction().compareTo(big.first().getAction()) == 1) {
+		    			big = find;
+		    		}
 		    	}
 		    }
 		    sizes[i] = largest;
 		    activityFrequency.remove(big.first().getAction()); //To not get rechosen as largest
-		    activityList.put(big.size(), big); //Add into array with frequency key
+		    activityList.put(big.first().getAction(), big); //Add into array with frequency key    //CANNOT HAVE 2 SAME KEYS
 	    }
 	    
 	    //Activity list holds sortedByAscending frequency lists
@@ -232,14 +237,14 @@ public class UserActivityLogManager {
 	    return activityFrequency;
 	}
 	
-	private List<String> getReturnArray(int[] sizes, Map<Integer, List<LogEntry>> activityList, List<LogEntry> big, int number) {
+	private List<String> getReturnArray(int[] sizes, Map<String, List<LogEntry>> activityList, List<LogEntry> big, int number) {
 		List<String> topActivities = DSAFactory.getIndexedList();
 	    int count = 0;
 	    
 	    //For each action list in descending order (getting by correctly sorted size[])
 	    for(int i = 0; i < sizes.length; i++) {
 	    	
-	    	big = activityList.get(sizes[i]); //acquire list
+	    	big = getLargest(activityList); //acquire list
 	    	int freq = 0;					  //set new frequency for action list
 	    	for(@SuppressWarnings("unused") LogEntry log : big) {
 	    		
@@ -258,6 +263,7 @@ public class UserActivityLogManager {
 	    	String entry = Integer.toString(freq) + ": " + big.first().getAction() + " " + big.first().getResource();
 	    	topActivities.addLast(entry);
 	    	
+	    	activityList.remove(big.first().getAction());
 	    	//if the request number was reached break this loop as well
 	    	if(count >= number) {
 	    		break;
@@ -265,5 +271,23 @@ public class UserActivityLogManager {
 	    }
 	    
 	    return topActivities;
+	}
+
+	private List<LogEntry> getLargest(Map<String, List<LogEntry>> activityList) {
+		List<LogEntry> large = DSAFactory.getIndexedList();
+		int size = 0;
+		for(List<LogEntry> list : activityList.values()) {
+			if(list.size() > size) {
+				size = list.size();
+				large = list;
+			}
+			else if(list.size() == size) {
+				if(list.first().getAction().compareTo(large.first().getAction()) == -1) {
+					large = list;
+				}
+			}
+		}
+		
+		return large;
 	}
 }

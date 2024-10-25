@@ -11,7 +11,7 @@ import edu.ncsu.csc316.activity.dsa.DataStructure;
 import edu.ncsu.csc316.dsa.list.List;
 import edu.ncsu.csc316.dsa.map.Map;
 
-public class TestUserActivityLogManager {
+public class UserActivityLogManagerTest {
 	
 	private UserActivityLogManager def;
 	private UserActivityLogManager type;

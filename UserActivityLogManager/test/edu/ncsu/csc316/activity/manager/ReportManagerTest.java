@@ -10,11 +10,12 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestReportManager {
+public class ReportManagerTest {
 	
 	private FileWriter writer;
 	private ReportManager reportManager;
 	private ReportManager report2Manager;
+	private ReportManager report3Manager;
     
     /**
      * Sets up the ReportManager with LOGIN1.txt before each test.
@@ -24,6 +25,7 @@ public class TestReportManager {
         // Initialize the ReportManager with LOGIN1.txt
         reportManager = new ReportManager("LOGIN1.txt");
         report2Manager = new ReportManager("LOGIN2.txt");
+        report3Manager = new ReportManager("LOGIN3.txt");
     }
 
     /**
@@ -88,6 +90,11 @@ public class TestReportManager {
         		+ "   hqcooney, 11/08/2016 10:43:29AM, sort, HL7 Code 422\n"
         		+ "]", report);
         
+        report = report3Manager.getHourReport(22);
+        /*assertEquals("Activities recorded during hour 22 [\n"
+        		+ "   bpviscou, 09/21/2024 10:17:42PM, watch, training video\n"
+        		+ "]", report);
+        */
     }
 
     /**
@@ -103,6 +110,15 @@ public class TestReportManager {
         
         report = reportManager.getHourReport(14);
         assertEquals("No activities were recorded during hour 14", report);
+        
+        report = report3Manager.getHourReport(14);
+        assertEquals("No activities were recorded during hour 14", report);
+        
+        report = report3Manager.getHourReport(21);
+        assertEquals("No activities were recorded during hour 21", report);
+        
+        report = report3Manager.getHourReport(23);
+        assertEquals("No activities were recorded during hour 23", report);
     }
     
     /**
@@ -140,6 +156,10 @@ public class TestReportManager {
         report = reportManager.getTopUserActivitiesReport(2);
         assertTrue("The top user activities should contain the correct frequency of 'sort' activities",
         		report.contains("2: sort HL7 Code 422"));
+        
+        report = report3Manager.getTopUserActivitiesReport(2);
+        assertTrue("The top user activities should contain the correct frequency of 'sort' activities",
+        		report.contains("1: watch training video"));
     }
     
     

@@ -1,0 +1,2 @@
+USERNAME, TIMESTAMP, ACTION, RESOURCE
+bpviscou, 09/21/2024 10:17:42PM, watch, training video

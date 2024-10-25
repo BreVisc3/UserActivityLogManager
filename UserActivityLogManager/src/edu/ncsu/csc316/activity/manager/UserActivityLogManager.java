@@ -253,6 +253,7 @@ public class UserActivityLogManager {
 	    		//if the number of entries requested hasn't been reached
 	    		if(count < number) {
 	    			
+	    			count++;
 	    			freq++;
 	    		}
 	    		//if the request number has been reached leave the loop

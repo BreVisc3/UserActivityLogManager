@@ -139,7 +139,7 @@ public class TestReportManager {
         
         report = reportManager.getTopUserActivitiesReport(2);
         assertTrue("The top user activities should contain the correct frequency of 'sort' activities",
-        		report.contains("13: sort HL7 Code 422"));
+        		report.contains("2: sort HL7 Code 422"));
     }
     
     

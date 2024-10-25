@@ -75,8 +75,10 @@ public class UserActivityLogManagerUI {
                 case "4":
                     System.out.print("Enter the hour (hh) to view logs: ");
                     String dateHour = scanner.nextLine();
+                    String[] time = dateHour.split("/");
+                    int hour = Integer.parseInt(time[0]);
                     try {
-                    	String hourReport = manager.getHourReport(dateHour);
+                    	String hourReport = manager.getHourReport(hour);
                     	System.out.println(hourReport);
                     } catch(NullPointerException e) {
                     	System.out.println("A file has not been loaded in to the manager yet, use choice [1], enter a valid file, and try again.\n\n");

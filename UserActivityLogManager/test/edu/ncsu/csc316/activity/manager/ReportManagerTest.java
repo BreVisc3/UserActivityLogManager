@@ -48,18 +48,14 @@ public class ReportManagerTest {
 	        assertEquals("Activities recorded on 02/19/2017 [\n"
 	        		+ "   hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422\n"
 	        		+ "]", report);
-	        /*
-	        try {
-				report = new String (Files.readAllBytes(Paths.get("output/DATEOUT1.TXT")));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	        
-			assertEquals(report.trim() , reportManager.getDateReport("10/02/2015"));		    ///HOW DO I GET THESE TO MATCH UP ESCAPE SEQUENCE-WISE
-	        */
 	        
 	        assertTrue("The date report should contain the correct log entry for 02/19/2017", 
 	        		report.contains("hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422"));
+	        
+	        report = report3Manager.getDateReport("09/21/2024");
+	        assertEquals("Activities recorded on 09/21/2024 [\n"
+	        		+ "   bpviscou, 09/21/2024 10:17:42PM, watch, training video\n"
+	        		+ "]", report);
 	        
 		} catch (IOException e) {
 			e.printStackTrace();

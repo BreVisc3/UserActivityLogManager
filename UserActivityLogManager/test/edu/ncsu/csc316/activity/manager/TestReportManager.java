@@ -2,11 +2,17 @@ package edu.ncsu.csc316.activity.manager;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestReportManager {
+	
+	private FileWriter writer;
 	private ReportManager reportManager;
 	private ReportManager report2Manager;
     
@@ -25,23 +31,38 @@ public class TestReportManager {
      */
     @Test
     public void testGetDateReportValid() {
-        String report = reportManager.getDateReport("02/19/2017");
+        String report = reportManager.getDateReport("10/02/2015");
         
-        assertEquals("Activities recorded on 02/19/2017 [\n"
-        		+ "   hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422\n"
-        		+ "]", report);
-        /*
         try {
-			report = new String (Files.readAllBytes(Paths.get("output/DATEOUT1.TXT")));
+			writer = new FileWriter("result/DATERESULTS1.txt", false);
+			
+			writer.write(report);
+			writer.close();
+
+			assertFilesEqual("output/DATEOUT1.txt", "result/DATERESULTS1.txt");
+			
+			report = reportManager.getDateReport("02/19/2017");
+	        
+	        assertEquals("Activities recorded on 02/19/2017 [\n"
+	        		+ "   hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422\n"
+	        		+ "]", report);
+	        /*
+	        try {
+				report = new String (Files.readAllBytes(Paths.get("output/DATEOUT1.TXT")));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	        
+			assertEquals(report.trim() , reportManager.getDateReport("10/02/2015"));		    ///HOW DO I GET THESE TO MATCH UP ESCAPE SEQUENCE-WISE
+	        */
+	        
+	        assertTrue("The date report should contain the correct log entry for 02/19/2017", 
+	        		report.contains("hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422"));
+	        
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
         
-		assertEquals(report.trim() , reportManager.getDateReport("10/02/2015"));		    ///HOW DO I GET THESE TO MATCH UP ESCAPE SEQUENCE-WISE
-        */
-        
-        assertTrue("The date report should contain the correct log entry for 02/19/2017", 
-        		report.contains("hqcooney, 02/19/2017 06:16:58PM, sort, HL7 Code 422"));
     }
 
     /**
@@ -119,5 +140,30 @@ public class TestReportManager {
         report = reportManager.getTopUserActivitiesReport(2);
         assertTrue("The top user activities should contain the correct frequency of 'sort' activities",
         		report.contains("13: sort HL7 Code 422"));
+    }
+    
+    
+    public void assertFilesEqual(String expectedFilePath, String actualFilePath) {
+        try (BufferedReader expectedReader = new BufferedReader(new FileReader(expectedFilePath));
+             BufferedReader actualReader = new BufferedReader(new FileReader(actualFilePath))) {
+
+            String expectedLine;
+            String actualLine;
+
+            while ((expectedLine = expectedReader.readLine()) != null) {
+                actualLine = actualReader.readLine();
+
+                // Assert each line is the same
+                assertEquals(expectedLine, actualLine, actualLine);
+            }
+
+            // Check if the actual file has extra lines
+            if (actualReader.readLine() != null) {
+                fail("Actual file has extra lines beyond expected file");
+            }
+
+        } catch (IOException e) {
+            fail("An error occurred while reading files: " + e.getMessage());
+        }
     }
 }

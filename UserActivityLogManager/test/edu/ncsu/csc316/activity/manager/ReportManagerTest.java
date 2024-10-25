@@ -87,10 +87,10 @@ public class ReportManagerTest {
         		+ "]", report);
         
         report = report3Manager.getHourReport(22);
-        /*assertEquals("Activities recorded during hour 22 [\n"
+        assertEquals("Activities recorded during hour 22 [\n"
         		+ "   bpviscou, 09/21/2024 10:17:42PM, watch, training video\n"
         		+ "]", report);
-        */
+        
     }
 
     /**

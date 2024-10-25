@@ -48,7 +48,7 @@ public class UserActivityLogManagerUI {
                     System.out.print("Enter the number of most frequent activities to view: ");
                     int numActivities = Integer.parseInt(scanner.nextLine());
                     try {
-                    	String frequentActivities = manager.getTopUserActivities(numActivities);
+                    	String frequentActivities = manager.getTopUserActivitiesReport(numActivities);
                     	System.out.println(frequentActivities);
                     } catch(NullPointerException e) {
                     	System.out.println("A file has not been loaded in to the manager yet, use choice [1], enter a valid file, and try again.\n\n");

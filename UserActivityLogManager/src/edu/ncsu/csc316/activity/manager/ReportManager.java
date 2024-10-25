@@ -137,7 +137,7 @@ public class ReportManager {
 	 * @param number of logs to get
 	 * @return String with most frequented log activities
 	 */
-	public String getTopUserActivities(int number) {
+	public String getTopUserActivitiesReport(int number) {
 		
 		List<String> list = DSAFactory.getIndexedList();
 		list = activityLogManager.getTopActivities(number);

@@ -89,17 +89,25 @@ public class TestReportManager {
      */
     @Test
     public void testGetTopUserActivities() {
-        String report = reportManager.getTopUserActivities(15);
+        String report = reportManager.getTopUserActivitiesReport(15);
         assertTrue("The top user activities should contain the correct frequency of 'sort' activities",
         		report.contains("13: sort HL7 Code 422"));
         assertTrue("The top user activities should contain the correct frequency of 'print' activities", 
         		report.contains("2: print office visit OV02132"));
         
-        assertEquals(reportManager.getTopUserActivities(-1), "Please enter a number > 0");
+        assertEquals(reportManager.getTopUserActivitiesReport(-1), "Please enter a number > 0");
         
-        assertEquals(report2Manager.getTopUserActivities(10), "The log file does not contain any user activities");
+        assertEquals(report2Manager.getTopUserActivitiesReport(10), "The log file does not contain any user activities");
         
-        assertEquals(reportManager.getTopUserActivities(17),
+        assertEquals(reportManager.getTopUserActivitiesReport(17),
+        		"Top User Activities Report [\n"
+        		+ "   13: sort HL7 Code 422\n"
+        		+ "   2: print office visit OV02132\n"
+        		+ "   1: unmerge notification NX1115\n"
+        		+ "   1: view HL7 Code 422\n"
+        		+ "]");
+        
+        assertEquals(reportManager.getTopUserActivitiesReport(20),
         		"Top User Activities Report [\n"
         		+ "   13: sort HL7 Code 422\n"
         		+ "   2: print office visit OV02132\n"
@@ -108,7 +116,7 @@ public class TestReportManager {
         		+ "]");
         
         
-        report = reportManager.getTopUserActivities(2);
+        report = reportManager.getTopUserActivitiesReport(2);
         assertTrue("The top user activities should contain the correct frequency of 'sort' activities",
         		report.contains("13: sort HL7 Code 422"));
     }

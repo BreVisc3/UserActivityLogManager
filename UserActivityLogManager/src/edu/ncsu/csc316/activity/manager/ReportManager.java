@@ -95,16 +95,14 @@ public class ReportManager {
 	 * @param hour to get
 	 * @return String of all logs on hour parameter
 	 */
-	public String getHourReport(String hour) {
+	public String getHourReport(int hour) {
 		try {
 			
-			int parsedHour = Integer.parseInt(hour);
-			
-			if(parsedHour < 0 || parsedHour > 23) {
+			if(hour < 0 || hour > 23) {
 				throw new NumberFormatException();
 			}
 			
-			Map<String, List<LogEntry>> map = DSAFactory.getMap(null);
+			Map<Integer, List<LogEntry>> map = DSAFactory.getMap(null);
             map = activityLogManager.getEntriesByHour();
 			
 			List<LogEntry> list = DSAFactory.getIndexedList();

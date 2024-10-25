@@ -108,9 +108,9 @@ public class UserActivityLogManager {
 	 * Get LogEntries by hour
 	 * @return Map of logEntries
 	 */
-	public Map<String, List<LogEntry>> getEntriesByHour() {
+	public Map<Integer, List<LogEntry>> getEntriesByHour() {  //REFACTOR
 		
-		Map<String, List<LogEntry>> hourMap = DSAFactory.getMap(null);
+		Map<Integer, List<LogEntry>> hourMap = DSAFactory.getMap(null);
 		
 		for (LogEntry entry : logList) {
 	        // Format timestamp to extract the hour portion
@@ -120,13 +120,14 @@ public class UserActivityLogManager {
 	                ? Integer.toString(Integer.parseInt(hour[0]) + 12) 
 	                : hour[0];
 	        
+	        int numHour = Integer.parseInt(milHour);
 	        // Check if the hour is already in the map
-	        List<LogEntry> entriesForHour = hourMap.get(milHour);
+	        List<LogEntry> entriesForHour = hourMap.get(numHour);
 	        
 	        if (entriesForHour == null) {
 	            // If no entries exist for this hour, create a new list
 	            entriesForHour = DSAFactory.getIndexedList();
-	            hourMap.put(milHour, entriesForHour);
+	            hourMap.put(numHour, entriesForHour);
 	        }
 	        
 	        // Add the current log entry to the list for that hour
@@ -135,7 +136,7 @@ public class UserActivityLogManager {
 		
 		//////////////////////////////////////
 		
-		Map<String, List<LogEntry>> sortedHourMap = DSAFactory.getMap(null);
+		Map<Integer, List<LogEntry>> sortedHourMap = DSAFactory.getMap(null);
 
 	    // Sort the log entries within each hour by their timestamp
 	    for (List<LogEntry> entries : hourMap.values()) {
@@ -159,7 +160,8 @@ public class UserActivityLogManager {
 	    		sorted.addLast(arr[i]);
 	    	}
 	    	
-	    	sortedHourMap.put(milHour, sorted);
+	    	int numHour = Integer.parseInt(milHour);
+	    	sortedHourMap.put(numHour, sorted);
 	    }
 
 	    return sortedHourMap;

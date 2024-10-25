@@ -61,7 +61,7 @@ public class TestReportManager {
      */
     @Test
     public void testGetHourReportValid() {
-        String report = reportManager.getHourReport("10");
+        String report = reportManager.getHourReport(10);
         assertTrue(report.contains("hqcooney, 11/08/2016 10:43:29AM, sort, HL7 Code 422"));
         assertEquals("Activities recorded during hour 10 [\n"
         		+ "   hqcooney, 11/08/2016 10:43:29AM, sort, HL7 Code 422\n"
@@ -74,13 +74,13 @@ public class TestReportManager {
      */
     @Test
     public void testGetHourReportInvalid() {
-        String report = reportManager.getHourReport("25");
+        String report = reportManager.getHourReport(25);
         assertEquals("Please enter a valid hour between 0 (12AM) and 23 (11PM)", report);
         
-        report = reportManager.getHourReport("-1");
+        report = reportManager.getHourReport(-1);
         assertEquals("Please enter a valid hour between 0 (12AM) and 23 (11PM)", report);
         
-        report = reportManager.getHourReport("14");
+        report = reportManager.getHourReport(14);
         assertEquals("No activities were recorded during hour 14", report);
     }
     

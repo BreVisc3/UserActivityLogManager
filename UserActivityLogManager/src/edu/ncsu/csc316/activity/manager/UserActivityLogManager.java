@@ -151,6 +151,7 @@ public class UserActivityLogManager {
 	    	Sorter<LogEntry> comp = DSAFactory.getComparisonSorter(null);
 	    	comp.sort(arr);
 	    	
+	    	
 	    	for(int i = 0; i < entries.size(); i++) {
 	    		sorted.addLast(arr[i]);
 	    	}
@@ -183,12 +184,17 @@ public class UserActivityLogManager {
 		    for(List<LogEntry> find : activityFrequency.values()) {
 		    	
 		    	if(find.size() > largest) {
-		    		largest = find.size();				//ERRRRRROOOORRRRR
+		    		largest = find.size();				
 		    		big = find;
 		    	}
-		    	else if(find.size() == largest) {
-		    		if(find.first().getAction().compareTo(big.first().getAction()) == 1) {
-		    			big = find;
+		    	else if(find.size() == largest) {   //////TODO: FIX LOGIC HERE
+		    		char[] findLet = find.first().getAction().toCharArray();
+		    		char[] bigLet = big.first().getAction().toCharArray();
+		    		for(int j = 0; j < Math.min(bigLet.length, findLet.length); j++) {
+			    		if(findLet[j] > bigLet[j]) {
+			    			big = find;
+			    			break;
+			    		}
 		    		}
 		    	}
 		    }

@@ -10,12 +10,15 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.ncsu.csc316.activity.dsa.DataStructure;
+
 public class ReportManagerTest {
 	
 	private FileWriter writer;
 	private ReportManager reportManager;
 	private ReportManager report2Manager;
 	private ReportManager report3Manager;
+	private ReportManager report4Manager;
     
     /**
      * Sets up the ReportManager with LOGIN1.txt before each test.
@@ -25,7 +28,8 @@ public class ReportManagerTest {
         // Initialize the ReportManager with LOGIN1.txt
         reportManager = new ReportManager("LOGIN1.txt");
         report2Manager = new ReportManager("LOGIN2.txt");
-        report3Manager = new ReportManager("LOGIN3.txt");
+        report3Manager = new ReportManager("LOGIN3.txt", DataStructure.SKIPLIST);
+        report4Manager = new ReportManager("LOGIN4.txt", DataStructure.UNORDEREDLINKEDMAP);        
     }
 
     /**
@@ -55,6 +59,20 @@ public class ReportManagerTest {
 	        report = report3Manager.getDateReport("09/21/2024");
 	        assertEquals("Activities recorded on 09/21/2024 [\n"
 	        		+ "   bpviscou, 09/21/2024 10:17:42PM, watch, training video\n"
+	        		+ "]", report);
+	        
+	        report = report4Manager.getDateReport("09/21/2024");
+	        assertEquals("Activities recorded on 09/21/2024 [\n"
+	        		+ "   jkquinn, 09/21/2024 03:33:33PM, watch, training video\n"
+	        		+ "   rjphili, 09/21/2024 08:17:42PM, watch, training video\n"
+	        		+ "   bpviscou, 09/21/2024 10:17:42PM, watch, training video\n"
+	        		+ "]", report);
+	        
+	        report = report4Manager.getDateReport("03/21/2024");
+	        assertEquals("Activities recorded on 03/21/2024 [\n"
+	        		+ "   bpviscou, 03/21/2024 04:20:14PM, read, progress report\n"
+	        		+ "   bpviscou, 03/21/2024 05:27:14PM, read, progress report\n"
+	        		+ "   bpviscou, 03/21/2024 06:20:36PM, read, progress report\n"
 	        		+ "]", report);
 	        
 		} catch (IOException e) {
@@ -91,6 +109,11 @@ public class ReportManagerTest {
         		+ "   bpviscou, 09/21/2024 10:17:42PM, watch, training video\n"
         		+ "]", report);
         
+        report = report4Manager.getHourReport(20);
+        assertEquals("Activities recorded during hour 20 [\n"
+        		+ "   jkquinn, 03/26/2024 08:20:40PM, read, progress report\n"
+        		+ "   rjphili, 09/21/2024 08:17:42PM, watch, training video\n"
+        		+ "]", report);
     }
 
     /**
@@ -156,6 +179,15 @@ public class ReportManagerTest {
         report = report3Manager.getTopUserActivitiesReport(2);
         assertTrue("The top user activities should contain the correct frequency of 'sort' activities",
         		report.contains("1: watch training video"));
+        
+        assertEquals(report4Manager.getTopUserActivitiesReport(20),
+        		"Top User Activities Report [\n"
+        		+ "   6: read progress report\n"
+        		+ "   6: watch training video\n"
+        		+ "   2: sort related files\n"
+        		+ "   1: complete assigned task\n"
+        		+ "   1: research new strategies\n"
+        		+ "]");
     }
     
     

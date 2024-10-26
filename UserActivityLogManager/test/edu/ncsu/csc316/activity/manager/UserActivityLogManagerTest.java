@@ -11,24 +11,35 @@ import edu.ncsu.csc316.activity.dsa.DataStructure;
 import edu.ncsu.csc316.dsa.list.List;
 import edu.ncsu.csc316.dsa.map.Map;
 
+/**
+ * Tests UserActivityLogManager
+ */
 public class UserActivityLogManagerTest {
 	
 	private UserActivityLogManager def;
 	private UserActivityLogManager type;
+	private UserActivityLogManager uni;
 	private Map<String, List<LogEntry>> map;
 	private Map<Integer, List<LogEntry>> hourMap;
 	private List<String> list;
 	
+	/**
+	 * set up for testing
+	 */
 	@Before
 	public void setUp() {
 		def = new UserActivityLogManager("LOGIN1.TXT");
 		type = new UserActivityLogManager("LOGIN2.TXT", DataStructure.UNORDEREDLINKEDMAP);
+		uni = new UserActivityLogManager("LOGIN4.TXT", DataStructure.SEARCHTABLE);
 		
 		map = DSAFactory.getMap(null);
 		hourMap = DSAFactory.getMap(null);
 		list = DSAFactory.getIndexedList();
 	}
 	
+	/**
+	 * tests the functionality of getEntriesByDate
+	 */
 	@Test
 	public void TestGetEntriesByDate() {
 		
@@ -37,8 +48,14 @@ public class UserActivityLogManagerTest {
 		
 		map = type.getEntriesByDate();
 		assertEquals(map.size(), 0);
+		
+		map = uni.getEntriesByDate();
+		assertEquals(map.size(), 11);
 	}
 
+	/**
+	 * tests the functionality of getEntriesByHour
+	 */
 	@Test
 	public void TestGetEntriesByHour() {
 		
@@ -48,8 +65,14 @@ public class UserActivityLogManagerTest {
 		hourMap = type.getEntriesByHour();
 		assertEquals(hourMap.size(), 0);
 		
+		hourMap = uni.getEntriesByHour();
+		assertEquals(hourMap.size(), 14);
+		
 	}
 	
+	/**
+	 * tests the functionality of getTopActivities
+	 */
 	@Test
 	public void TestGetTopActivities() {
 		
@@ -85,6 +108,14 @@ public class UserActivityLogManagerTest {
 		
 		list = type.getTopActivities(10);
 		assertEquals(list.size(), 0);
+		
+		list = uni.getTopActivities(10);
+		assertEquals(list.get(0), "6: read progress report");
+		assertEquals(list.get(1), "4: watch training video");
+		
+		list = uni.getTopActivities(12);
+		assertEquals(list.get(0), "6: read progress report");
+		assertEquals(list.get(1), "6: watch training video");
 		
 		
 	}

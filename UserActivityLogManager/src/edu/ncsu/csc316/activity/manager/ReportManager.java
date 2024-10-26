@@ -35,7 +35,7 @@ public class ReportManager {
 	/**
 	 * Constructor
 	 * @param logFile to read from
-	 * @param data structure to store file data in
+	 * @param mapType to store file data in
 	 */
 	public ReportManager(String logFile, DataStructure mapType) {
         DSAFactory.setListType(mapType);

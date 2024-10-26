@@ -35,7 +35,7 @@ public class UserActivityLogManager {
 	/**
 	 * Constructor
 	 * @param logFile to read from
-	 * @param DataStructure to be used for storage
+	 * @param mapType to be used for storage
 	 */
 	public UserActivityLogManager(String logFile, DataStructure mapType) {
 		DSAFactory.setListType(DataStructure.ARRAYBASEDLIST);
@@ -206,16 +206,16 @@ public class UserActivityLogManager {
 	    //Activity list holds sortedByAscending frequency lists
 	    
 	    //SORT BY LARGEST SIZE
-	    List<String> topActivities = getReturnArray(sizes, activityList, big, number);
+	    List<String> topActivities = getReturnArray(sizes, activityList, number);
 	    
 	    return topActivities;
 	}
 	
 	
 	/**
-	 * 
-	 * @param list
-	 * @return
+	 * Returns list sorted into sublists by action
+	 * @param list of logs
+	 * @return logs sorted into action lists
 	 */
 	private Map<String, List<LogEntry>> getActionList(List<LogEntry> list) {
 		Map<String, List<LogEntry>> activityFrequency = DSAFactory.getMap(null);
@@ -239,14 +239,21 @@ public class UserActivityLogManager {
 	    return activityFrequency;
 	}
 	
-	private List<String> getReturnArray(int[] sizes, Map<String, List<LogEntry>> activityList, List<LogEntry> big, int number) {
+	/**
+	 * Gets the array to be returned for topActivities
+	 * @param sizes of each list sorted
+	 * @param activityList list of logs sorted by action
+	 * @param number of most frequented logs requested
+	 * @return List of string representations of the log frequency
+	 */
+	private List<String> getReturnArray(int[] sizes, Map<String, List<LogEntry>> activityList, int number) {
 		List<String> topActivities = DSAFactory.getIndexedList();
 	    int count = 0;
 	    
 	    //For each action list in descending order (getting by correctly sorted size[])
 	    for(int i = 0; i < sizes.length; i++) {
 	    	
-	    	big = getLargest(activityList); //acquire list
+	    	List<LogEntry> big = getLargest(activityList); //acquire list
 	    	int freq = 0;					  //set new frequency for action list
 	    	for(@SuppressWarnings("unused") LogEntry log : big) {
 	    		
@@ -275,7 +282,12 @@ public class UserActivityLogManager {
 	    
 	    return topActivities;
 	}
-
+	
+	/**
+	 * Gets the most frequented log action list
+	 * @param activityList logs sorted into lists by action
+	 * @return the most frequented action list
+	 */
 	private List<LogEntry> getLargest(Map<String, List<LogEntry>> activityList) {
 		List<LogEntry> large = DSAFactory.getIndexedList();
 		int size = 0;

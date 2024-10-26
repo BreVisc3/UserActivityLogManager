@@ -190,8 +190,12 @@ public class ReportManagerTest {
         		+ "]");
     }
     
-    
-    public void assertFilesEqual(String expectedFilePath, String actualFilePath) {
+    /**
+     * Helper method to assert File contents
+     * @param expectedFilePath valid output
+     * @param actualFilePath testing output
+     */
+    private void assertFilesEqual(String expectedFilePath, String actualFilePath) {
         try (BufferedReader expectedReader = new BufferedReader(new FileReader(expectedFilePath));
              BufferedReader actualReader = new BufferedReader(new FileReader(actualFilePath))) {
 

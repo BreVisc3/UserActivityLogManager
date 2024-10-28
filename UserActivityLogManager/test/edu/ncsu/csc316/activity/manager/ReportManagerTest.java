@@ -26,10 +26,10 @@ public class ReportManagerTest {
     @Before
     public void setUp() {
         // Initialize the ReportManager with LOGIN1.txt
-        reportManager = new ReportManager("LOGIN1.txt");
-        report2Manager = new ReportManager("LOGIN2.txt");
-        report3Manager = new ReportManager("LOGIN3.txt", DataStructure.SKIPLIST);
-        report4Manager = new ReportManager("LOGIN4.txt", DataStructure.UNORDEREDLINKEDMAP);        
+        reportManager = new ReportManager("LOGIN1.TXT");
+        report2Manager = new ReportManager("LOGIN2.TXT");
+        report3Manager = new ReportManager("LOGIN3.TXT", DataStructure.SKIPLIST);
+        report4Manager = new ReportManager("LOGIN4.TXT", DataStructure.UNORDEREDLINKEDMAP);        
     }
 
     /**
@@ -40,12 +40,12 @@ public class ReportManagerTest {
         String report = reportManager.getDateReport("10/02/2015");
         
         try {
-			writer = new FileWriter("result/DATERESULTS1.txt", false);
+			writer = new FileWriter("result/DATERESULTS1.TXT", false);
 			
 			writer.write(report);
 			writer.close();
 
-			assertFilesEqual("output/DATEOUT1.txt", "result/DATERESULTS1.txt");
+			assertFilesEqual("output/DATEOUT1.TXT", "result/DATERESULTS1.TXT");
 			
 			report = reportManager.getDateReport("02/19/2017");
 	        

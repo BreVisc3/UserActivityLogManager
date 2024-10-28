@@ -81,7 +81,7 @@ public class ReportManager {
             	report.append("]");
             }
             else {
-            	return "No activities were recorded on " + date;
+            	return "Activities recorded on " + date + " []";
             }
             
             return report.toString();

@@ -87,7 +87,7 @@ public class ReportManagerTest {
     @Test
     public void testGetDateReportInvalid() {
     	String report = reportManager.getDateReport("02/30/2017");
-        assertEquals("Activities recorded on 02/30/2017 []", report);
+        assertEquals("No activities were recorded on 02/30/2017", report);
         
         report = reportManager.getDateReport("2/30/2017");
         assertEquals("Please enter a valid date in the format MM/DD/YYYY", report);

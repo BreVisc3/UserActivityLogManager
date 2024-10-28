@@ -28,7 +28,7 @@ public class ReportManagerTest {
         // Initialize the ReportManager with LOGIN1.txt
         reportManager = new ReportManager("LOGIN1.TXT");
         report2Manager = new ReportManager("LOGIN2.TXT");
-        report3Manager = new ReportManager("LOGIN3.TXT", DataStructure.SKIPLIST);
+        report3Manager = new ReportManager("LOGIN3.TXT", DataStructure.SINGLYLINKEDLIST);
         report4Manager = new ReportManager("LOGIN4.TXT", DataStructure.UNORDEREDLINKEDMAP);        
     }
 
@@ -87,7 +87,7 @@ public class ReportManagerTest {
     @Test
     public void testGetDateReportInvalid() {
     	String report = reportManager.getDateReport("02/30/2017");
-        assertEquals("Activities recorded on 02/30/2017 []", report);
+        assertEquals("No activities were recorded on 02/30/2017", report);
         
         report = reportManager.getDateReport("2/30/2017");
         assertEquals("Please enter a valid date in the format MM/DD/YYYY", report);

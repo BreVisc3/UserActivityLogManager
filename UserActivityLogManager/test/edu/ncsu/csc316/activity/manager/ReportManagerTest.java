@@ -12,6 +12,9 @@ import org.junit.Test;
 
 import edu.ncsu.csc316.activity.dsa.DataStructure;
 
+/**
+ * Tests functionality of ReportManager
+ */
 public class ReportManagerTest {
 	
 	/**

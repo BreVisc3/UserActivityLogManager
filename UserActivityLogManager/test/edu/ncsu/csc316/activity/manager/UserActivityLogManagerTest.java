@@ -59,7 +59,7 @@ public class UserActivityLogManagerTest {
 	 * tests the functionality of getEntriesByDate
 	 */
 	@Test
-	public void TestGetEntriesByDate() {
+	public void testGetEntriesByDate() {
 		
 		map = def.getEntriesByDate();
 		assertEquals(map.size(), 16);
@@ -75,7 +75,7 @@ public class UserActivityLogManagerTest {
 	 * tests the functionality of getEntriesByHour
 	 */
 	@Test
-	public void TestGetEntriesByHour() {
+	public void testGetEntriesByHour() {
 		
 		hourMap = def.getEntriesByHour();
 		assertEquals(hourMap.size(), 14);
@@ -92,7 +92,7 @@ public class UserActivityLogManagerTest {
 	 * tests the functionality of getTopActivities
 	 */
 	@Test
-	public void TestGetTopActivities() {
+	public void testGetTopActivities() {
 		
 		list = def.getTopActivities(17);
 		assertEquals(list.size(), 4);

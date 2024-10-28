@@ -61,7 +61,7 @@ public class UserActivityLogManager {
         try {
         	logList = LogEntryReader.loadLogEntries(path + logFile);
         } catch(Exception e) {
-        	
+        	e.printStackTrace();
         }
 	}
 	
@@ -202,7 +202,7 @@ public class UserActivityLogManager {
 		    		largest = find.size();				
 		    		big = find;
 		    	}
-		    	else if(find.size() == largest) {   //////TODO: FIX LOGIC HERE
+		    	else if(find.size() == largest) {  
 		    		char[] findLet = find.first().getAction().toCharArray();
 		    		char[] bigLet = big.first().getAction().toCharArray();
 		    		for(int j = 0; j < Math.min(bigLet.length, findLet.length); j++) {

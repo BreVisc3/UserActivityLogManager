@@ -18,10 +18,25 @@ import edu.ncsu.csc316.activity.dsa.DSAFactory;
  */
 public class UserActivityLogManager {
 	
+	/**
+	 * list
+	 */
 	private List<LogEntry> logList;
+	/**
+	 * manager
+	 */
 	private final String path = "input/";
+	/**
+	 * format
+	 */
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    /**
+     * format
+     */
     private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ssa");
+    /**
+     * scanner
+     */
     Scanner scanner;
 
 	/**

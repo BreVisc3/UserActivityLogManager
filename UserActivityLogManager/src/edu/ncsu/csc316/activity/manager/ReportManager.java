@@ -18,9 +18,13 @@ public class ReportManager {
 	 * manager
 	 */
 	private UserActivityLogManager activityLogManager;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm:ssa");
+	/**
+	 * format
+	 */
     private final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ssa");
+    /**
+     * INDENT
+     */
     private static final String INDENT = "   ";
     
 	

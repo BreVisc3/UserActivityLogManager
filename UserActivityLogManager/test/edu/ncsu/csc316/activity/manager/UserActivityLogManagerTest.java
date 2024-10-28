@@ -16,11 +16,29 @@ import edu.ncsu.csc316.dsa.map.Map;
  */
 public class UserActivityLogManagerTest {
 	
+	/**
+	 * manager
+	 */
 	private UserActivityLogManager def;
+	/**
+	 * manager
+	 */
 	private UserActivityLogManager type;
+	/**
+	 * manager
+	 */
 	private UserActivityLogManager uni;
+	/**
+	 * map
+	 */
 	private Map<String, List<LogEntry>> map;
+	/**
+	 * map
+	 */
 	private Map<Integer, List<LogEntry>> hourMap;
+	/**
+	 * list
+	 */
 	private List<String> list;
 	
 	/**

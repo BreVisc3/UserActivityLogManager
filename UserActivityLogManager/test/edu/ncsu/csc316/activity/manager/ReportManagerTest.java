@@ -14,10 +14,25 @@ import edu.ncsu.csc316.activity.dsa.DataStructure;
 
 public class ReportManagerTest {
 	
+	/**
+	 * writer
+	 */
 	private FileWriter writer;
+	/**
+	 * manager
+	 */
 	private ReportManager reportManager;
+	/**
+	 * manager
+	 */
 	private ReportManager report2Manager;
+	/**
+	 * manager
+	 */
 	private ReportManager report3Manager;
+	/**
+	 * manager
+	 */
 	private ReportManager report4Manager;
     
     /**

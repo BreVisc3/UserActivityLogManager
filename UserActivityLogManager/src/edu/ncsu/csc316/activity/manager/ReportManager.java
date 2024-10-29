@@ -85,8 +85,7 @@ public class ReportManager {
             	report.append("]");
             }
             else {
-            	return "Activities recorded on " + date + " [\n" 
-            			+ INDENT + "No activities were recorded on " + date + "\n]";
+            	return "No activities were recorded on " + date;
             }
             
             return report.toString();
@@ -126,8 +125,7 @@ public class ReportManager {
 				report.append("]");
 			}
 			else {
-				return "Activities recorded during hour " + hour 
-						+ " [\n" + INDENT + "No activities were recorded during hour " + hour + "\n]";
+				return "No activities were recorded during hour " + hour;
 			}
 			
 			return report.toString();

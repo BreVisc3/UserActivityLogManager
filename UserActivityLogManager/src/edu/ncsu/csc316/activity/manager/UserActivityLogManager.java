@@ -23,10 +23,6 @@ public class UserActivityLogManager {
 	 */
 	private List<LogEntry> logList;
 	/**
-	 * manager
-	 */
-	private final String path = "input/";
-	/**
 	 * format
 	 */
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -59,7 +55,7 @@ public class UserActivityLogManager {
         DSAFactory.setMapType(mapType);
         
         try {
-        	logList = LogEntryReader.loadLogEntries(path + logFile);
+        	logList = LogEntryReader.loadLogEntries(logFile);
         } catch(Exception e) {
         	e.printStackTrace();
         }

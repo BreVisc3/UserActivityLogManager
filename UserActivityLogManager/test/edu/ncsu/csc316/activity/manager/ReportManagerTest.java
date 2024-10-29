@@ -44,10 +44,10 @@ public class ReportManagerTest {
     @Before
     public void setUp() {
         // Initialize the ReportManager with LOGIN1.txt
-        reportManager = new ReportManager("LOGIN1.TXT");
-        report2Manager = new ReportManager("LOGIN2.TXT");
-        report3Manager = new ReportManager("LOGIN3.TXT", DataStructure.SEARCHTABLE);
-        report4Manager = new ReportManager("LOGIN4.TXT", DataStructure.UNORDEREDLINKEDMAP);        
+        reportManager = new ReportManager("input/LOGIN1.TXT");
+        report2Manager = new ReportManager("input/LOGIN2.TXT");
+        report3Manager = new ReportManager("input/LOGIN3.TXT", DataStructure.SEARCHTABLE);
+        report4Manager = new ReportManager("input/LOGIN4.TXT", DataStructure.UNORDEREDLINKEDMAP);        
     }
 
     /**

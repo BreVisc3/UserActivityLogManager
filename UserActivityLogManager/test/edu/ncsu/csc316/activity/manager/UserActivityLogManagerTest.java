@@ -46,9 +46,9 @@ public class UserActivityLogManagerTest {
 	 */
 	@Before
 	public void setUp() {
-		def = new UserActivityLogManager("LOGIN1.TXT");
-		type = new UserActivityLogManager("LOGIN2.TXT", DataStructure.UNORDEREDLINKEDMAP);
-		uni = new UserActivityLogManager("LOGIN4.TXT", DataStructure.SEARCHTABLE);
+		def = new UserActivityLogManager("input/LOGIN1.TXT");
+		type = new UserActivityLogManager("input/LOGIN2.TXT", DataStructure.UNORDEREDLINKEDMAP);
+		uni = new UserActivityLogManager("input/LOGIN4.TXT", DataStructure.SEARCHTABLE);
 		
 		map = DSAFactory.getMap(null);
 		hourMap = DSAFactory.getMap(null);

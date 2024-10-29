@@ -146,7 +146,7 @@ public class ReportManager {
 		
 		StringBuilder report = new StringBuilder();
 		
-		if(number < 0) {
+		if(number <= 0) {
 			return  "Please enter a number > 0";
 		}
 		

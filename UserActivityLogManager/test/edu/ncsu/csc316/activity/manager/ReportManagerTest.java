@@ -105,7 +105,8 @@ public class ReportManagerTest {
     @Test
     public void testGetDateReportInvalid() {
     	String report = reportManager.getDateReport("02/30/2017");
-        assertEquals("No activities were recorded on 02/30/2017", report);
+        assertEquals("Activities recorded on 02/30/2017 [\n"
+        		+ "   No activities were recorded on 02/30/2017\n]", report);
         
         report = reportManager.getDateReport("2/30/2017");
         assertEquals("Please enter a valid date in the format MM/DD/YYYY", report);
@@ -146,16 +147,24 @@ public class ReportManagerTest {
         assertEquals("Please enter a valid hour between 0 (12AM) and 23 (11PM)", report);
         
         report = reportManager.getHourReport(14);
-        assertEquals("No activities were recorded during hour 14", report);
+        assertEquals("Activities recorded during hour 14 [\n"
+        		+ "   No activities were recorded during hour 14\n"
+        		+ "]", report);
         
         report = report3Manager.getHourReport(14);
-        assertEquals("No activities were recorded during hour 14", report);
+        assertEquals("Activities recorded during hour 14 [\n"
+        		+ "   No activities were recorded during hour 14\n"
+        		+ "]", report);
         
         report = report3Manager.getHourReport(21);
-        assertEquals("No activities were recorded during hour 21", report);
+        assertEquals("Activities recorded during hour 21 [\n"
+        		+ "   No activities were recorded during hour 21\n"
+        		+ "]", report);
         
         report = report3Manager.getHourReport(23);
-        assertEquals("No activities were recorded during hour 23", report);
+        assertEquals("Activities recorded during hour 23 [\n"
+        		+ "   No activities were recorded during hour 23\n"
+        		+ "]", report);
     }
     
     /**

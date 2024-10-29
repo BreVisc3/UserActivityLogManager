@@ -259,36 +259,17 @@ public class UserActivityLogManager {
 	 */
 	private List<String> getReturnArray(int[] sizes, Map<String, List<LogEntry>> activityList, int number) {
 		List<String> topActivities = DSAFactory.getIndexedList();
-	    int count = 0;
 	    
 	    //For each action list in descending order (getting by correctly sorted size[])
-	    for(int i = 0; i <= sizes.length - 1; i++) {
+	    for(int i = 0; i < Math.min(sizes.length, number); i++) {
 	    	
 	    	List<LogEntry> big = getLargest(activityList); //acquire list
-	    	int freq = 0;					  //set new frequency for action list
-	    	for(@SuppressWarnings("unused") LogEntry log : big) {
-	    		
-	    		//if the number of entries requested hasn't been reached
-	    		if(count < number) {
-	    			
-	    			count++;
-	    			freq++;
-	    		}
-	    		//if the request number has been reached leave the loop
-	    		else {
-	    			break;
-	    		}
-	    	}
 	    	
 	    	//Add string to return list
-	    	String entry = Integer.toString(freq) + ": " + big.first().getAction() + " " + big.first().getResource();
+	    	String entry = big.size() + ": " + big.first().getAction() + " " + big.first().getResource();
 	    	topActivities.addLast(entry);
 	    	
 	    	activityList.remove(big.first().getAction());
-	    	//if the request number was reached break this loop as well
-	    	if(count >= number) {
-	    		break;
-	    	}
 	    }
 	    
 	    return topActivities;

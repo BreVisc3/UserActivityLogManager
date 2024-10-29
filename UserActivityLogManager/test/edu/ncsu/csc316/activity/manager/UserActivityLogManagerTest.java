@@ -108,32 +108,31 @@ public class UserActivityLogManagerTest {
 		assertEquals(list.get(2), "1: unmerge notification NX1115");
 		assertEquals(list.get(3), "1: view HL7 Code 422");
 		
-		list = def.getTopActivities(16);
+		list = def.getTopActivities(3);
 		assertEquals(list.size(), 3);
 		assertEquals(list.get(0), "13: sort HL7 Code 422");
 		assertEquals(list.get(1), "2: print office visit OV02132");
 		assertEquals(list.get(2), "1: unmerge notification NX1115");
 		
-		list = def.getTopActivities(14);
+		list = def.getTopActivities(2);
 		assertEquals(list.size(), 2);
 		assertEquals(list.get(0), "13: sort HL7 Code 422");
-		assertEquals(list.get(1), "1: print office visit OV02132");
+		assertEquals(list.get(1), "2: print office visit OV02132");
 		
-		list = def.getTopActivities(10);
+		list = def.getTopActivities(1);
 		assertEquals(list.size(), 1);
-		assertEquals(list.get(0), "10: sort HL7 Code 422");
+		assertEquals(list.get(0), "13: sort HL7 Code 422");
 		
 		
 		list = type.getTopActivities(10);
 		assertEquals(list.size(), 0);
 		
-		list = uni.getTopActivities(10);
-		assertEquals(list.get(0), "6: read progress report");
-		assertEquals(list.get(1), "4: watch training video");
-		
-		list = uni.getTopActivities(12);
+		list = uni.getTopActivities(2);
 		assertEquals(list.get(0), "6: read progress report");
 		assertEquals(list.get(1), "6: watch training video");
+		
+		list = uni.getTopActivities(1);
+		assertEquals(list.get(0), "6: read progress report");
 		
 		
 	}

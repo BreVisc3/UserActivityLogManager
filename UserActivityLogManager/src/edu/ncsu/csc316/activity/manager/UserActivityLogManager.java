@@ -190,7 +190,7 @@ public class UserActivityLogManager {
 	    int[] sizes = new int[activityFrequency.size()];
 
 
-	    for(int i = 0; i < sizes.length; i++) {
+	    for(int i = 0; i <= sizes.length - 1; i++) {
 	    	int largest = 0;
 		    for(List<LogEntry> find : activityFrequency.values()) {
 		    	
@@ -262,7 +262,7 @@ public class UserActivityLogManager {
 	    int count = 0;
 	    
 	    //For each action list in descending order (getting by correctly sorted size[])
-	    for(int i = 0; i < sizes.length; i++) {
+	    for(int i = 0; i <= sizes.length - 1; i++) {
 	    	
 	    	List<LogEntry> big = getLargest(activityList); //acquire list
 	    	int freq = 0;					  //set new frequency for action list

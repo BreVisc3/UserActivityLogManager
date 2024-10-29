@@ -46,7 +46,7 @@ public class ReportManagerTest {
         // Initialize the ReportManager with LOGIN1.txt
         reportManager = new ReportManager("LOGIN1.TXT");
         report2Manager = new ReportManager("LOGIN2.TXT");
-        report3Manager = new ReportManager("LOGIN3.TXT", DataStructure.SINGLYLINKEDLIST);
+        report3Manager = new ReportManager("LOGIN3.TXT", DataStructure.SEARCHTABLE);
         report4Manager = new ReportManager("LOGIN4.TXT", DataStructure.UNORDEREDLINKEDMAP);        
     }
 

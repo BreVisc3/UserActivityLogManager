@@ -69,56 +69,52 @@ public class UserActivityLogManager {
 	 * @return Map of logEntries
 	 */
 	public Map<String, List<LogEntry>> getEntriesByDate() {
-        
-		Map<String, List<LogEntry>> dateMap = DSAFactory.getMap(null);
-		
-		for (LogEntry entry : logList) {
-	        String date = entry.getTimestamp().format(dateFormat);  // Format timestamp to a String date
-	        
+	    Map<String, List<LogEntry>> dateMap = DSAFactory.getMap(null);
+
+	    // Populate map with log entries grouped by date
+	    for (LogEntry entry : logList) {
+	        String date = entry.getTimestamp().format(dateFormat);
+
 	        List<LogEntry> entriesForDate = dateMap.get(date);
-	        
 	        if (entriesForDate == null) {
-	            // Create a new list for entries of that date if none exists
 	            entriesForDate = DSAFactory.getIndexedList();
 	            dateMap.put(date, entriesForDate);
 	        }
-	        
-	        // Add the current log entry to the list
 	        entriesForDate.addLast(entry);
 	    }
 
-		/////////////////////
-		
-		Map<String, List<LogEntry>> sortedDateMap = DSAFactory.getMap(null);
-		Sorter<LogEntry> comp = DSAFactory.getComparisonSorter(null);
-	    // Sort the log entries within each date by their timestamps or other criteria
-	    for (List<LogEntry> entries : dateMap.values()) {
-	    	
-	    	String date = entries.first().getTimestamp().format(dateFormat);
-	    	List<LogEntry> sorted = DSAFactory.getIndexedList();
-	    	
-	    	LogEntry[] arr = new LogEntry[entries.size()];
-	    	for(int i = 0; i < entries.size(); i++) {
-	    		arr[i] = entries.get(i);
-	    	}
-	    	
-	        comp.sort(arr);
+	    // Sort each list of log entries within the map
+	    Sorter<LogEntry> sorter = DSAFactory.getComparisonSorter(null);
+	    for (Map.Entry<String, List<LogEntry>> entry : dateMap.entrySet()) {
+	        List<LogEntry> entriesForDate = entry.getValue();
 	        
-	        for(int i = 0; i < entries.size(); i++) {
-	        	sorted.addLast(arr[i]);
+	        // Convert list to array for sorting
+	        LogEntry[] entryArray = new LogEntry[entriesForDate.size()];
+	        for (int i = 0; i < entriesForDate.size(); i++) {
+	            entryArray[i] = entriesForDate.get(i);
 	        }
-	        
-	        sortedDateMap.put(date, sorted);
+
+	        // Sort the array
+	        sorter.sort(entryArray);
+
+	        // Transfer sorted elements back into a list
+	        List<LogEntry> sortedList = DSAFactory.getIndexedList();
+	        for (LogEntry logEntry : entryArray) {
+	            sortedList.addLast(logEntry);
+	        }
+
+	        // Update map with sorted list
+	        dateMap.put(entry.getKey(), sortedList);
 	    }
 
-	    return sortedDateMap;
+	    return dateMap;
 	}
 	
 	/**
 	 * Get LogEntries by hour
 	 * @return Map of logEntries
 	 */
-	public Map<Integer, List<LogEntry>> getEntriesByHour() {  //REFACTOR
+	public Map<Integer, List<LogEntry>> getEntriesByHour() {  
 		
 		Map<Integer, List<LogEntry>> hourMap = DSAFactory.getMap(null);
 		

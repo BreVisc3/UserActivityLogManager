@@ -233,7 +233,14 @@ public class UserActivityLogManager {
 	        List<LogEntry> isActivity = activityFrequency.get(activity);
 	        
 	        if(isActivity != null) {
-	        	activityFrequency.get(activity).addLast(entry);
+	        	if(!isActivity.first().getResource().equals(entry.getResource())) {
+	        		List<LogEntry> newList = DSAFactory.getIndexedList();
+		        	newList.addLast(entry);
+		        	activityFrequency.put(activity, newList);
+	        	}
+	        	else {
+	        		activityFrequency.get(activity).addLast(entry);
+	        	}
 	        }
 	        else {
 	        	List<LogEntry> newList = DSAFactory.getIndexedList();

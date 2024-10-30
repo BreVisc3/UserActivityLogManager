@@ -90,7 +90,7 @@ public class UserActivityLogManager {
 		/////////////////////
 		
 		Map<String, List<LogEntry>> sortedDateMap = DSAFactory.getMap(null);
-
+		Sorter<LogEntry> comp = DSAFactory.getComparisonSorter(null);
 	    // Sort the log entries within each date by their timestamps or other criteria
 	    for (List<LogEntry> entries : dateMap.values()) {
 	    	
@@ -102,7 +102,6 @@ public class UserActivityLogManager {
 	    		arr[i] = entries.get(i);
 	    	}
 	    	
-	    	Sorter<LogEntry> comp = DSAFactory.getComparisonSorter(null);
 	        comp.sort(arr);
 	        
 	        for(int i = 0; i < entries.size(); i++) {

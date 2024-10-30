@@ -59,7 +59,7 @@ public class UserActivityLogManagerUI {
                     break;
 
                 case "3":
-                    System.out.print("Enter the date (yyyy-mm-dd) to view logs: ");
+                    System.out.print("Enter the date (mm-dd-yyyy) to view logs: ");
                     String date = scanner.nextLine();
                     try {
                     	String dateReport = manager.getDateReport(date);

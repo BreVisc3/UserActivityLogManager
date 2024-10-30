@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"edu.ncsu.csc316.activity.manager","l":"UserActivityLogManagerTest"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"edu.ncsu.csc316.activity.manager","l":"UserActivityLogManager"}];updateSearchResults();

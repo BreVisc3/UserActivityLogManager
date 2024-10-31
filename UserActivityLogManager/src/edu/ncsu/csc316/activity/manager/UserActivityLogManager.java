@@ -205,8 +205,8 @@ public class UserActivityLogManager {
 		    	}
 		    }
 		    sizes[i] = largest;
-		    activityFrequency.remove(big.first().getAction()); //To not get rechosen as largest
-		    activityList.put(big.first().getAction(), big); //Add into array with frequency key    //CANNOT HAVE 2 SAME KEYS
+		    activityFrequency.remove(big.first().getAction() + " " + big.first().getResource()); //To not get rechosen as largest
+		    activityList.put(big.first().getAction() + " " + big.first().getResource(), big); //Add into array with frequency key    //CANNOT HAVE 2 SAME KEYS
 	    }
 	    
 	    //Activity list holds sortedByAscending frequency lists
@@ -228,7 +228,7 @@ public class UserActivityLogManager {
 	    
 	    // Count occurrences of each activity
 	    for (LogEntry entry : list) {
-	        String activity = entry.getAction(); 
+	        String activity = entry.getAction() + " " + entry.getResource(); 
 	        
 	        List<LogEntry> isActivity = activityFrequency.get(activity);
 	        
@@ -271,7 +271,7 @@ public class UserActivityLogManager {
 	    	String entry = big.size() + ": " + big.first().getAction() + " " + big.first().getResource();
 	    	topActivities.addLast(entry);
 	    	
-	    	activityList.remove(big.first().getAction());
+	    	activityList.remove(big.first().getAction() + " " + big.first().getResource());
 	    }
 	    
 	    return topActivities;

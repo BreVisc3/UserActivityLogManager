@@ -1,0 +1,17 @@
+USERNAME, TIMESTAMP, ACTION, RESOURCE
+bpviscou, 09/21/2024 10:17:42PM, watch, training video
+rjphili, 09/21/2024 08:17:42PM, watch, training video
+jkquinn, 09/21/2024 03:33:33PM, watch, training video
+bpviscou, 04/03/2024 10:17:42AM, watch, training video
+rjphili, 06/28/2024 08:17:42AM, watch, training video
+bpviscou, 03/21/2024 05:27:14PM, read, progress report
+bpviscou, 03/21/2024 06:20:36PM, read, progress report
+jkquinn, 05/13/2024 03:33:33AM, watch, training video
+bpviscou, 03/21/2024 04:20:14PM, read, progress report
+jkquinn, 03/26/2024 06:20:36PM, read, progress report
+jkquinn, 03/26/2024 08:20:40PM, read, progress report
+rjphili, 03/25/2024 02:46:12PM, read, progress report
+rjphili, 12/15/2024 02:06:33AM, sort, related files
+rjphili, 12/18/2024 04:12:32AM, sort, related files
+jkquinn, 11/28/2024 09:09:09AM, research, new strategies
+bpviscou, 10/31/2024 07:37:37AM, complete, assigned task

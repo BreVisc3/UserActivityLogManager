@@ -286,8 +286,18 @@ public class UserActivityLogManager {
 				large = list;
 			}
 			else if(list.size() == size) {
-				if((list.first().getAction() + " " + list.first().getResource()).compareTo(large.first().getAction() + " " + large.first().getResource()) == -1) {
+				if(list.first().getAction().compareTo(large.first().getAction()) == -1) {
 					large = list;
+				}
+				else if(list.first().getAction().compareTo(large.first().getAction()) == 0) {
+					char[] listLet = list.first().getResource().toCharArray();
+					char[] largeLet = large.first().getResource().toCharArray();
+					for(int i = 0; i < Math.min(list.first().getResource().length(), large.first().getResource().length()); i++) {
+						if(listLet[i] < largeLet[i]) {
+							large = list;
+							break;
+						}
+					}
 				}
 			}
 		}

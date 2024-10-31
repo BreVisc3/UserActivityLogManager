@@ -194,13 +194,8 @@ public class UserActivityLogManager {
 		    		big = find;
 		    	}
 		    	else if(find.size() == largest) {  
-		    		char[] findLet = find.first().getAction().toCharArray();
-		    		char[] bigLet = big.first().getAction().toCharArray();
-		    		for(int j = 0; j < Math.min(bigLet.length, findLet.length); j++) {
-			    		if(findLet[j] > bigLet[j]) {
-			    			big = find;
-			    			break;
-			    		}
+		    		if((big.first().getAction() + " " + big.first().getResource()).compareTo(find.first().getAction() + " " + find.first().getResource()) < 0) {
+		    			big = find;
 		    		}
 		    	}
 		    }

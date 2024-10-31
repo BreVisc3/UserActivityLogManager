@@ -290,13 +290,11 @@ public class UserActivityLogManager {
 					large = list;
 				}
 				else if(list.first().getAction().compareTo(large.first().getAction()) == 0) {
-					char[] listLet = list.first().getResource().toLowerCase().toCharArray();
-					char[] largeLet = large.first().getResource().toLowerCase().toCharArray();
-					for(int i = 0; i < Math.min(list.first().getResource().length(), large.first().getResource().length()); i++) {
-						if(listLet[i] < largeLet[i]) {
-							large = list;
-							break;
-						}
+					String listResource = list.first().getResource().toLowerCase();
+					String largeResource = large.first().getResource().toLowerCase();
+
+					if (listResource.compareToIgnoreCase(largeResource) < 0) {
+					    large = list;
 					}
 				}
 			}
